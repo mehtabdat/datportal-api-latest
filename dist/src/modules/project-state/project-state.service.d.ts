@@ -1,0 +1,117 @@
+import { Prisma } from '@prisma/client';
+import { Pagination } from 'src/common-types/common-types';
+import { PrismaService } from 'src/prisma.service';
+import { CreateProjectStateDto } from './dto/create-project-state.dto';
+import { UpdateProjectStateDto } from './dto/update-project-state.dto';
+import { ProjectStateFiltersDto } from './dto/project-state-filters.dto';
+export declare class ProjectStateService {
+    private prisma;
+    private readonly logger;
+    constructor(prisma: PrismaService);
+    create(createDto: CreateProjectStateDto): Promise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }>;
+    findAll(filters: Prisma.ProjectStateWhereInput, pagination: Pagination): Prisma.PrismaPromise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }[]>;
+    findAllPublished(filters: Prisma.ProjectStateWhereInput, pagination: Pagination): Prisma.PrismaPromise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }[]>;
+    findAllPublishedStates(filters: Prisma.ProjectStateWhereInput): Prisma.PrismaPromise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }[]>;
+    findOne(id: number): Promise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }>;
+    findBySlug(slug: string): Promise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }>;
+    update(id: number, updateDto: UpdateProjectStateDto): Promise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }>;
+    remove(id: number): Promise<{
+        id: number;
+        title: string;
+        slug: string;
+        shouldCloseProject: boolean;
+        order: number;
+        isPublished: boolean;
+        isDeleted: boolean;
+        addedDate: Date;
+        isDefault: boolean;
+        bgColor: string;
+        textColor: string;
+    }>;
+    applyFilters(filters: ProjectStateFiltersDto): Prisma.ProjectStateWhereInput;
+    countFaqs(filters: Prisma.ProjectStateWhereInput): Prisma.PrismaPromise<number>;
+}

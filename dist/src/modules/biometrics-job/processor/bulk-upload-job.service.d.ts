@@ -1,0 +1,47 @@
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'src/prisma.service';
+import { FileConvertorService } from 'src/modules/file-convertor/file-convertor.service';
+import { Queue } from 'bull';
+export declare class BulkUploadJobService {
+    private prisma;
+    private attendanceQueue;
+    private readonly fileConvertorService;
+    private readonly logger;
+    totalRecords: number;
+    failedRecords: number;
+    success: number;
+    myCounter: number;
+    errorReport: Array<any>;
+    errorRecords: Array<any>;
+    activeJob: number;
+    jobQueue: Array<number>;
+    isProcessing: boolean;
+    constructor(prisma: PrismaService, attendanceQueue: Queue, fileConvertorService: FileConvertorService);
+    resetData(): void;
+    findOne(id: number): Promise<{
+        id: number;
+        file: string;
+        status: number;
+        isDeleted: boolean;
+        addedById: number;
+        addedDate: Date;
+        comment: string;
+        title: string;
+        backgroundId: string;
+        failed: number;
+        failedRecord: Prisma.JsonValue;
+        failedReport: Prisma.JsonValue;
+        mimeType: string;
+        processeStartDate: Date;
+        processedDate: Date;
+        processedFile: string;
+        success: number;
+        totalRecords: number;
+        uploadFormatId: number;
+    }>;
+    bulkUploadProperty(jobId: number): Promise<void>;
+    initializeDateAndTime(dateInput: string, timeInput: string): Date;
+    logBulkPropertyUpload(jobId: number, updateData: Prisma.BiometricsJobUpdateInput): Promise<void>;
+    reportError(jobId: number, message: string): Promise<void>;
+    clearJob(jobId: number): Promise<void>;
+}

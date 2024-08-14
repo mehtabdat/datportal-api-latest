@@ -1,0 +1,45 @@
+/// <reference types="multer" />
+import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ResponseError, ResponseSuccess } from 'src/common-types/common-types';
+import { ParamsDto } from './dto/params.dto';
+import { UserRoleDto } from './dto/user-role.dto';
+import { AuthenticatedRequest } from 'src/authentication/authenticated-request';
+import { UserPaginationDto } from './dto/user-pagination.dto';
+import { UserSortingDto } from './dto/user-sorting.dto';
+import { UserFiltersDto } from './dto/user-filters.dto';
+import { DeleteUserMetaByKeyDto, DeleteUserMetaDto, UpdateUserMetaDto } from './dto/update-user-meta.dto';
+import { UpdateMeDto } from './dto/update-me.dto';
+import { MeDto } from './dto/me.dto';
+import { UserAuthTokensIssuedDto } from './dto/auth-token-issued.dto';
+import { UploadUserDocuments } from './dto/user-document.dto';
+import { UpdateUserDocuments } from './dto/user-document-update.dto';
+import { UserAuthorizationService } from './user.authorization.service';
+import { UserSalaryDto } from './dto/user-salary.dto';
+export declare class UserController {
+    private readonly userService;
+    private readonly authorizationService;
+    constructor(userService: UserService, authorizationService: UserAuthorizationService);
+    uploadUserDocuments(uploadDocuments: UploadUserDocuments, files: Array<Express.Multer.File>, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    updateUserDocument(updateDocuments: UpdateUserDocuments, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    deleteUserDocument(params: ParamsDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    create(createUserDto: CreateUserDto, file: Express.Multer.File, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    findAll(pagination: UserPaginationDto, sorting: UserSortingDto, filters: UserFiltersDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    findUserLoginHistory(pagination: UserPaginationDto, filters: UserAuthTokensIssuedDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    findUserByToken(req: AuthenticatedRequest, meDto: MeDto): Promise<ResponseSuccess | ResponseError>;
+    findUserMenuList(req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    findUserPermissions(req: AuthenticatedRequest, slugs: string[]): Promise<ResponseSuccess | ResponseError>;
+    updateMe(updateUserDto: UpdateMeDto, file: Express.Multer.File, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    update(params: ParamsDto, updateUserDto: UpdateUserDto, file: Express.Multer.File, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    remove(params: ParamsDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    addRole(params: ParamsDto, userRoleDto: UserRoleDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    removeUserRole(params: ParamsDto, userRoleDto: UserRoleDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    updateUserMeta(req: AuthenticatedRequest, params: ParamsDto, updateUserMetaDto: UpdateUserMetaDto): Promise<ResponseSuccess | ResponseError>;
+    deleteOrgMeta(req: AuthenticatedRequest, params: ParamsDto, deleteUserMetaDto: DeleteUserMetaDto): Promise<ResponseSuccess | ResponseError>;
+    updateSalary(req: AuthenticatedRequest, params: ParamsDto, userSalaryDto: UserSalaryDto): Promise<ResponseSuccess | ResponseError>;
+    deleteOrgMetaByKey(req: AuthenticatedRequest, params: ParamsDto, deleteUserMetaByKeyDto: DeleteUserMetaByKeyDto): Promise<ResponseSuccess | ResponseError>;
+    findAllocatedResource(params: ParamsDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    findDashboardElements(req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+    findOne(params: ParamsDto, req: AuthenticatedRequest): Promise<ResponseSuccess | ResponseError>;
+}

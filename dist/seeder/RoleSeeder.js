@@ -1,0 +1,64 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RoleSeeder = void 0;
+const client_1 = require("@prisma/client");
+const prisma = new client_1.PrismaClient();
+const seederData = [
+    {
+        title: "System Super User",
+        slug: "SUPER-ADMIN",
+        description: "This is a super user of the system",
+        AddedBy: {
+            connect: {
+                email: "root@datconsultancy.com"
+            }
+        }
+    },
+    {
+        title: "System Admin User",
+        slug: "SYSTEM-ADMIN",
+        description: "This is an admin of the system",
+        AddedBy: {
+            connect: {
+                email: "root@datconsultancy.com"
+            }
+        }
+    },
+    {
+        title: "Organization Admin",
+        slug: "ORG-ADMIN",
+        description: "This is an organization admin",
+        AddedBy: {
+            connect: {
+                email: "root@datconsultancy.com"
+            }
+        }
+    },
+    {
+        title: "Customer",
+        slug: "CUSTOMER",
+        description: "This is a customer role in the system who has only view access",
+        AddedBy: {
+            connect: {
+                email: "root@datconsultancy.com"
+            }
+        }
+    }
+];
+exports.RoleSeeder = {
+    up: () => {
+        const __promises = [];
+        seederData.forEach(async function (ele) {
+            let __n = await prisma.role.upsert({
+                where: { slug: ele.slug },
+                update: {},
+                create: ele
+            }).catch(err => {
+                console.log("Error while seeding Roles", err);
+            });
+            __promises.push(__n);
+        });
+        return Promise.all(__promises);
+    }
+};
+//# sourceMappingURL=RoleSeeder.js.map
